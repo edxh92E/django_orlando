@@ -1,0 +1,19 @@
+{% extends 'base/home.html' %}
+
+{% block content %}
+<div class="row">
+    {% for libro in listado_libros %} 
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+                <h4 class="card-header">{{ libro.titulo }}</h4>
+                <div class="card-body">
+                    <p class="card-text">{{ libro.descripcion }}</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-primary">Leer mas</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}    
+    </div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base/header.html' %}
+{% block content %}
+<h1 class="my-4">Listo de libros</h1>
+<div class="row mb-3">
+        <div class="col-12">
+                <div class="float-right">
+                        <button class="btn btn-success">
+                                Nuevo libro
+                        </button>
+                </div>
+        </div>
+</div>
+<!-- <hr> -->
+<div class="row">
+        <table class="table table-striped ">
+                <thead>
+                        <th>No.</th>
+                        <th>Titulo</th>
+                        <th>Categoria</th>
+                        <th>Acciones</th>
+                </thead>
+                <tbody>
+                        {% for libro in listado_libros%}
+                        <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{libro.titulo}}</td>
+                                <td>{{libro.fecha_publicacion | date:"M d, Y"}}</td>
+                                <td>
+                                        <button class="btn btn-primary btn-sm">
+                                                Ver
+                                        </button>
+                                </td>
+                        </tr>
+                        {% endfor %}
+                </tbody>
+        </table>
+</div>
+{% endblock %}
