@@ -26,9 +26,10 @@
                                 <td>{{libro.titulo}}</td>
                                 <td>{{libro.fecha_publicacion | date:"M d, Y"}}</td>
                                 <td>
-                                        <button class="btn btn-primary btn-sm">
+                                        <a href="{% url 'detalle_libro' pk=libro.pk %}"
+                                                class="btn btn-primary btn-sm">
                                                 Ver
-                                        </button>
+                                        </a>
                                 </td>
                         </tr>
                         {% endfor %}
