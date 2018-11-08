@@ -4,9 +4,9 @@
 <div class="row mb-3">
         <div class="col-12">
                 <div class="float-right">
-                        <button class="btn btn-success">
+                        <a href="{% url 'nuevo_libro' %}"" class="btn btn-success">
                                 Nuevo libro
-                        </button>
+                        </a>
                 </div>
         </div>
 </div>
@@ -30,6 +30,8 @@
                                                 class="btn btn-primary btn-sm">
                                                 Ver
                                         </a>
+                                        <a href="{% url 'editar_libro' pk=libro.pk %}"
+                                        class="btn btn-sm btn-secondary">Editar</a>
                                 </td>
                         </tr>
                         {% endfor %}
