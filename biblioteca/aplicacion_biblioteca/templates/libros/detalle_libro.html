@@ -27,6 +27,14 @@
       <footer class="blockquote-footer">{{libro.categoria}}
       </footer>
     </blockquote>
+    <blockquote class="blockquote">
+        <p class="mb-0">Autores: </p>
+        {% for us in usuarios %}
+        <footer class="blockquote-footer">
+          {{us.usuario}}
+        </footer>
+        {% endfor %}
+      </blockquote>
     <div class="card my-4">
         <h5 class="card-header">Comentar:</h5>
         <div class="card-body">
@@ -46,4 +54,7 @@
     <hr>
     </div>
   </div>
+  <pre>
+      
+  </pre>
 {% endblock %}

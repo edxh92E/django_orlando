@@ -1,5 +1,5 @@
 from django import forms
-from .models import Libro, LibroUsuario
+from .models import Libro, LibroUsuario, DetallePrestado
 from django.forms.fields import DateField
 
 BIRTH_YEAR_CHOICES = ('1980', '1981', '1982')
@@ -24,3 +24,8 @@ class PrestarLibro(forms.ModelForm):
             'fecha_prestada': forms.TextInput(attrs={'class':'form-control', 'placeholder': '2018-01-02'}), 
             'fecha_devolucion':forms.TextInput(attrs={'class':'form-control', 'placeholder': '2018-01-02'}),
         }
+
+class LibroUserForm(forms.ModelForm):
+    class Meta:
+        model = Libro
+        fields = ['titulo', 'descripcion','categoria', 'fecha_publicacion', 'usuario']

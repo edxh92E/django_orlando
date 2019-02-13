@@ -1,5 +1,5 @@
-from .models import Libro
-from .forms import LibroForm, PrestarLibro
+from .models import Libro, LibroUsuario, DetallePrestado
+from .forms import LibroForm, PrestarLibro, LibroUserForm
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
@@ -16,7 +16,8 @@ def listado_libros(request):
 
 def detalle_libro(request, pk):
     libro = get_object_or_404(Libro, pk=pk)
-    return render(request, 'libros/detalle_libro.html', {'libro': libro})
+    usuarios = DetallePrestado.objects.filter(libro_id = pk)
+    return render(request, 'libros/detalle_libro.html', {'libro': libro, 'usuarios': usuarios})
 
 @login_required
 def nuevo_libro(request):
@@ -46,13 +47,14 @@ def editar_libro(request, pk):
 # def prestar_libro(request):
 def prestar_libro(request):
     if request.method == "POST":
-        form = PrestarLibro(request.POST)
+        form = LibroUserForm(request.POST)
         if form.is_valid():
-            libro_usuario = form.save(commit=False)
-            libro_usuario.save()
-            return redirect('detalle_libro', pk=libro_usuario.pk)
+            libro_us = Libro.objects.create(titulo=form.cleaned_data['titulo'], descripcion = form.cleaned_data['descripcion'], categoria = form.cleaned_data['categoria'],fecha_publicacion = form.cleaned_data['fecha_publicacion'])
+            for usuario_id in request.POST.getlist('usuario'):
+                detalle = DetallePrestado(usuario_id=usuario_id, libro_id = libro_us.id)
+                detalle.save()
+            return redirect('detalle_libro', pk=libro_us.pk)
     else:
-        form = PrestarLibro()
+        form = LibroUserForm()
     return render(request, 'libro_usuario/libro_usuario.html', {'form': form})
-    # form = PrestarLibro()
-    # return render(request, 'libro_usuario/libro_usuario.html', {'form': form})
+

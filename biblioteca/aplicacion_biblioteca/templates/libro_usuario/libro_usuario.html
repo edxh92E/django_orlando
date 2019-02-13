@@ -1,9 +1,9 @@
+{% extends 'base/header.html' %}
 
-{% extends 'base/header.html'%}
-{%block content%}
-<h1 class="my-4">Asociar un libro a un usuario</h1>
-<form method="POST" class="post-form mb-5">{% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="save btn btn-primary">Guardar</button>
-</form>
-{%endblock%}
+    {% block content %}
+        <h1>Nueva Pelicula</h1>
+        <form method="POST" class="post-form">{% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save btn btn-default">Guardar</button>
+        </form>
+    {% endblock %}
